@@ -1,490 +1,556 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
+<!DOCTYPE html> <!-- HTML5文档类型声明 -->
+<html> <!-- HTML根元素开始 -->
+<head> <!-- 头部元素开始，包含元数据和资源引用 -->
+  <meta charset="utf-8"> <!-- 设置字符编码为UTF-8 -->
+  <!-- 设置页面描述，用于搜索引擎优化 -->
+  <meta name="description" 
+        content="#############################################
+        Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.
+        #############################################">
+  <!-- 设置页面关键词 -->
+  <meta name="keywords" content="#############################################
+  Nerfies, D-NeRF, NeRF
+  #############################################">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 设置视口属性，用于响应式设计 -->
+  <!-- 设置页面标题 -->
+  <title>VERSA-Nav: Versatile Object-Goal Navigation Across Environments using Lightweight Explicit Maps and Open-Vocabulary Scene Graphs</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+  <!-- Global site tag (gtag.js) - Google Analytics --> <!-- Google Analytics全局标签注释 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> <!-- 异步加载Google Analytics脚本 -->
+  <script> <!-- 内联JavaScript脚本开始 -->
+    window.dataLayer = window.dataLayer || []; // 初始化Google Analytics数据层
 
-    function gtag() {
-      dataLayer.push(arguments);
+    function gtag() { // 定义gtag函数
+      dataLayer.push(arguments); // 将参数推送到数据层
     }
 
-    gtag('js', new Date());
+    gtag('js', new Date()); // 初始化Google Analytics
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+    gtag('config', 'G-PYVRSFMDRL'); // 配置Google Analytics追踪ID
+  </script> <!-- 内联JavaScript脚本结束 -->
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  <!-- 引入Google字体 -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" 
         rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
+  <link rel="stylesheet" href="./static/css/bulma.min.css"> <!-- 引入Bulma CSS框架 -->
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css"> <!-- 引入Bulma轮播组件样式 -->
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css"> <!-- 引入Bulma滑块组件样式 -->
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> <!-- 引入FontAwesome图标库 -->
+  <!-- 引入Academicons学术图标库 -->
+  <link rel="stylesheet" 
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="stylesheet" href="./static/css/index.css"> <!-- 引入自定义样式表 -->
+  <link rel="icon" href="./static/images/favicon.svg"> <!-- 设置网站图标 -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-</head>
-<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- 引入jQuery库 -->
+  <script defer src="./static/js/fontawesome.all.min.js"></script> <!-- 延迟加载FontAwesome JavaScript -->
+  <script src="./static/js/bulma-carousel.min.js"></script> <!-- 引入Bulma轮播组件JavaScript -->
+  <script src="./static/js/bulma-slider.min.js"></script> <!-- 引入Bulma滑块组件JavaScript -->
+  <script src="./static/js/index.js"></script> <!-- 引入自定义JavaScript -->
+</head> <!-- 头部元素结束 -->
+<body> <!-- 页面主体开始 -->
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
+<nav class="navbar" role="navigation" aria-label="main navigation"> <!-- 导航栏开始，设置角色和标签 -->
+  <div class="navbar-brand"> <!-- 导航栏品牌区域 -->
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"> <!-- 移动端汉堡菜单按钮 -->
+      <span aria-hidden="true"></span> <!-- 汉堡菜单线条1 -->
+      <span aria-hidden="true"></span> <!-- 汉堡菜单线条2 -->
+      <span aria-hidden="true"></span> <!-- 汉堡菜单线条3 -->
+    </a> <!-- 汉堡菜单按钮结束 -->
+  </div> <!-- 导航栏品牌区域结束 -->
+  <div class="navbar-menu"> <!-- 导航栏菜单容器 -->
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;"> <!-- 导航栏左侧开始区域，设置为居中 -->
+      <a class="navbar-item" href="https://keunhong.com"> <!-- 首页链接 -->
+      <span class="icon"> <!-- 图标容器 -->
+          <i class="fas fa-home"></i> <!-- FontAwesome首页图标 -->
+      </span> <!-- 图标容器结束 -->
+      </a> <!-- 首页链接结束 -->
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
+      <div class="navbar-item has-dropdown is-hoverable"> <!-- 下拉菜单项，支持悬停显示 -->
+        <a class="navbar-link"> <!-- 下拉菜单触发链接 -->
+          More Research <!-- 菜单文本：更多研究 -->
+        </a> <!-- 下拉菜单触发链接结束 -->
+        <div class="navbar-dropdown"> <!-- 下拉菜单内容容器 -->
+          <a class="navbar-item" href="https://github.com/EvomniDroid"> <!-- HyperNeRF项目链接 -->
+            主页 <!-- 链接文本 -->
+          </a> <!-- 个人主页项目链接结束 -->
+          <a class="navbar-item" href="https://github.com/EvomniDroid/dpsg"> <!-- Nerfies项目链接 -->
+            dpsg <!-- 链接文本 -->
+          </a> <!-- dpsg项目链接结束 -->
 
-  </div>
-</nav>
+        </div> <!-- 下拉菜单内容容器结束 -->
+      </div> <!-- 下拉菜单项结束 -->
+    </div> <!-- 导航栏左侧开始区域结束 -->
+
+  </div> <!-- 导航栏菜单容器结束 -->
+</nav> <!-- 导航栏结束 -->
+
+<!-- ############################################################################导航栏结束################################################################################### -->
+<section class="hero"> <!-- 英雄区域开始，用于主要内容展示 -->
+  <div class="hero-body"> <!-- 英雄区域主体 -->
+    <div class="container is-max-desktop"> <!-- 容器，最大宽度为桌面尺寸 -->
+      <div class="columns is-centered"> <!-- 居中的列布局 -->
+        <div class="column has-text-centered"> <!-- 文本居中的列 -->
+          <!-- 主标题，最大尺寸 -->
+          <h1 class="title is-1 publication-title">VERSA-Nav: Versatile Object-Goal Navigation Across Environments using Lightweight Explicit Maps and Open-Vocabulary Scene Graphs
+            </h1>
+          <div class="is-size-5 publication-authors"> <!-- 作者信息容器，尺寸5 -->
+            
+            <span class="author-block"> <!-- 作者块 -->
+              <a href="https://github.com/EvomniDroid">Hao Zhang</a><sup>12</sup>,</span> <!-- 作者1链接，带上标注1 -->
+            <span class="author-block"> <!-- 作者块 -->
+              <a href="https://utkarshsinha.com">Shicheng Fan</a><sup>32</sup>,</span> <!-- 作者2链接，带上标注2 -->
+            <span class="author-block"> <!-- 作者块 -->
+              <a href="https://jonbarron.info">Jiacheng Du</a><sup>42</sup>, <!-- 作者3链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+            <span class="author-block"> <!-- 作者块 -->
+                        <span class="author-block"> <!-- 作者块 -->
+              <a href="http://www.ricardomartinbrualla.com">tianhong wang</a><sup>1</sup> <!-- 作者7链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+                        <span class="author-block"> <!-- 作者块 -->
+              <a href="http://www.ricardomartinbrualla.com">jinghao  Zhang</a><sup>1</sup> <!-- 作者7链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+              <a href="http://sofienbouaziz.com">Wei Chen</a><sup>1</sup>, <!-- 作者4链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+            <span class="author-block"> <!-- 作者块 -->
+              <a href="https://www.danbgoldman.com">Luying Feng</a><sup>1</sup>, <!-- 作者5链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+            <span class="author-block"> <!-- 作者块 -->
+              <a href="https://homes.cs.washington.edu/~seitz/">fengqi dai</a><sup>1</sup>, <!-- 作者6链接，带上标注1,2 -->
+            </span> <!-- 作者块结束 -->
 
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
-          </div>
+                        <span class="author-block"> <!-- 作者块 -->
+              <a href="http://www.ricardomartinbrualla.com">Yaochu Jin</a><sup>1† </sup> <!-- 作者7链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+                        <span class="author-block"> <!-- 作者块 -->
+              <a href="http://www.ricardomartinbrualla.com">Weibin Gu</a><sup>2†</sup> <!-- 作者7链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+                        <span class="author-block"> <!-- 作者块 -->
+              <a href="http://www.ricardomartinbrualla.com">Lu Shi</a><sup>2†</sup> <!-- 作者7链接，带上标注2 -->
+            </span> <!-- 作者块结束 -->
+          
+<!-- ############################################################################作者信息容器结束################################################################################### -->
+          </div> <!-- 作者信息容器结束 -->
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
-          </div>
+          <div class="is-size-5 publication-authors"> <!-- 机构信息容器，尺寸5 -->
+            
+            <span class="author-block"><sup>1</sup>Westlake University,</span> <!-- 机构1：西湖大学 -->
+            <span class="author-block"><sup>2</sup>Tsinghua University,</span> <!-- 机构2：清华大学 -->
+            <span class="author-block"><sup>3</sup>Beijing Institute of Technology,</span> <!-- 机构3：北理 -->
+            <span class="author-block"><sup>4</sup>National University of Singapore</span> <!-- 机构4：新国立 -->            
+          </div> <!-- 机构信息容器结束 -->
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
+          <div class="column has-text-centered"> <!-- 居中文本的列 -->
+            <div class="publication-links"> <!-- 发布链接容器 -->
+              
+              <!-- PDF链接 -->
+              <span class="link-block"> <!-- 链接块 -->
+                <!-- PDF下载链接 -->
                 <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
+                   class="external-link button is-normal is-rounded is-dark"> <!-- 外部链接按钮样式：普通大小、圆角、深色 -->
+                  <span class="icon"> <!-- 图标容器 -->
+                      <i class="fas fa-file-pdf"></i> <!-- PDF文件图标 -->
+                  </span> <!-- 图标容器结束 -->
+                  <span>Paper</span> <!-- 按钮文本：论文 -->
+                </a> <!-- PDF下载链接结束 -->
+              </span> <!-- 链接块结束 -->
+              <span class="link-block"> <!-- 链接块 -->
+                <!-- arXiv链接 -->
                 <a href="https://arxiv.org/abs/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
+                   class="external-link button is-normal is-rounded is-dark"> <!-- 外部链接按钮样式 -->
+                  <span class="icon"> <!-- 图标容器 -->
+                      <i class="ai ai-arxiv"></i> <!-- arXiv图标 -->
+                  </span> <!-- 图标容器结束 -->
+                  <span>arXiv</span> <!-- 按钮文本：arXiv -->
+                </a> <!-- arXiv链接结束 -->
+              </span> <!-- 链接块结束 -->
+              <!-- 视频链接 -->
+              <span class="link-block"> <!-- 链接块 -->
+                <!-- YouTube视频链接 -->
                 <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
+                   class="external-link button is-normal is-rounded is-dark"> <!-- 外部链接按钮样式 -->
+                  <span class="icon"> <!-- 图标容器 -->
+                      <i class="fab fa-youtube"></i> <!-- YouTube图标 -->
+                  </span> <!-- 图标容器结束 -->
+                  <span>Video</span> <!-- 按钮文本：视频 -->
+                </a> <!-- YouTube视频链接结束 -->
+              </span> <!-- 链接块结束 -->
+              <!-- 代码链接 -->
+              <span class="link-block"> <!-- 链接块 -->
+                <!-- GitHub代码库链接 -->
                 <a href="https://github.com/google/nerfies"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
+                   class="external-link button is-normal is-rounded is-dark"> <!-- 外部链接按钮样式 -->
+                  <span class="icon"> <!-- 图标容器 -->
+                      <i class="fab fa-github"></i> <!-- GitHub图标 -->
+                  </span> <!-- 图标容器结束 -->
+                  <span>Code</span> <!-- 按钮文本：代码 -->
+                  </a> <!-- GitHub代码库链接结束 -->
+              </span> <!-- 链接块结束 -->
+              <!-- 数据集链接 -->
+              <span class="link-block"> <!-- 链接块 -->
+                <!-- 数据集下载链接 -->
                 <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
-            </div>
+                   class="external-link button is-normal is-rounded is-dark"> <!-- 外部链接按钮样式 -->
+                  <span class="icon"> <!-- 图标容器 -->
+                      <i class="far fa-images"></i> <!-- 图片图标 -->
+                  </span> <!-- 图标容器结束 -->
+                  <span>Data</span> <!-- 按钮文本：数据 -->
+                  </a> <!-- 数据集下载链接结束 -->
+              
+            </div> <!-- 发布链接容器结束 -->
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          </div> <!-- 居中文本的列结束 -->
+        </div> <!-- 文本居中的列结束 -->
+      </div> <!-- 居中的列布局结束 -->
+    </div> <!-- 容器结束 -->
+  </div> <!-- 英雄区域主体结束 -->
+</section> <!-- 英雄区域结束 -->
+<!-- ############################################################################题目区域################################################################################### -->
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
+
+<section class="hero teaser"> <!-- 预告片英雄区域开始 -->
+  <div class="container is-max-desktop"> <!-- 容器，最大宽度为桌面尺寸 -->
+    <div class="hero-body"> <!-- 英雄区域主体 -->
+      
+      <!-- 预告片视频，自动播放、静音、循环、内联播放、高度100% -->
       <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
-    </div>
-  </div>
-</section>
+        
+        <!-- 视频源文件路径 -->
+        <source src="./static/videos/室外取书送书end.mp4"
+                type="video/mp4"> <!-- 视频类型：MP4 -->
+      </video> <!-- 预告片视频结束 -->
+      
+      <h2 class="subtitle has-text-centered"> <!-- 副标题，文本居中 -->
+        <span class="dnerf">MAIN VIDEO</span>
+      </h2> <!-- 副标题结束 -->
+    </div> <!-- 英雄区域主体结束 -->
+  </div> <!-- 容器结束 -->
+</section> <!-- 预告片英雄区域结束 -->
 
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
+<section class="hero is-light is-small"> <!-- 轻色调小尺寸英雄区域开始 -->
+  <div class="hero-body"> <!-- 英雄区域主体 -->
+    <div class="container"> <!-- 容器 -->
+      <div id="results-carousel" class="carousel results-carousel"> <!-- 结果轮播图容器 -->
+        <div class="item item-steve"> <!-- 轮播项：Steve -->
+          <!-- Steve视频：自动播放、显示控件、静音、循环、内联播放 -->
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外到水管end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Steve视频结束 -->
+        </div> <!-- 轮播项Steve结束 -->
+        <div class="item item-chair-tp"> <!-- 轮播项：Chair-tp -->
+          <!-- Chair-tp视频 -->
           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外到沙堆end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Chair-tp视频结束 -->
+        </div> <!-- 轮播项Chair-tp结束 -->
+        <div class="item item-shiba"> <!-- 轮播项：Shiba -->
+          <!-- Shiba视频 -->
           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外去台子end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Shiba视频结束 -->
+        </div> <!-- 轮播项Shiba结束 -->
+        <div class="item item-fullbody"> <!-- 轮播项：Fullbody -->
+          <!-- Fullbody视频 -->
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外去桥end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Fullbody视频结束 -->
+        </div> <!-- 轮播项Fullbody结束 -->
+        <div class="item item-blueshirt"> <!-- 轮播项：Blueshirt -->
+          <!-- Blueshirt视频 -->
           <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外取水送水end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Blueshirt视频结束 -->
+        </div> <!-- 轮播项Blueshirt结束 -->
+        <div class="item item-mask"> <!-- 轮播项：Mask -->
+          <!-- Mask视频 -->
           <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外高台送包end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Mask视频结束 -->
+        </div> <!-- 轮播项Mask结束 -->
+        <div class="item item-coffee"> <!-- 轮播项：Coffee -->
+          <!-- Coffee视频 -->
           <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外取书送书end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Coffee视频结束 -->
+        </div> <!-- 轮播项Coffee结束 -->
+        <div class="item item-toby"> <!-- 轮播项：Toby -->
+          <!-- Toby视频 -->
           <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外到水管end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- Toby视频结束 -->
+        </div> <!-- 轮播项Toby结束 -->
+      </div> <!-- 结果轮播图容器结束 -->
+    </div> <!-- 容器结束 -->
+  </div> <!-- 英雄区域主体结束 -->
+</section> <!-- 轻色调小尺寸英雄区域结束 -->
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
+<section class="section"> <!-- 普通区域开始 -->
+  <div class="container is-max-desktop"> <!-- 最大桌面尺寸容器 -->
+    <!-- Abstract. --> <!-- 摘要区域注释 -->
+    <div class="columns is-centered has-text-centered"> <!-- 居中的列布局，文本居中 -->
+      <div class="column is-four-fifths"> <!-- 占五分之四宽度的列 -->
+        <h2 class="title is-3">Abstract</h2> <!-- 三级标题：摘要 -->
+        <div class="content has-text-justified"> <!-- 内容区域，文本两端对齐 -->
+          #############################################
+          <p> <!-- 段落1 -->
+            We present the first method capable of photorealistically reconstructing a non-rigidly <!-- 我们提出了第一种能够真实地重建非刚性变形场景的方法 -->
+            deforming scene using photos/videos captured casually from mobile phones. <!-- 使用手机随意拍摄的照片/视频 -->
+          </p> <!-- 段落1结束 -->
+          <p> <!-- 段落2 -->
+            Our approach augments neural radiance fields <!-- 我们的方法增强了神经辐射场 -->
+            (NeRF) by optimizing an <!-- 通过优化一个 -->
+            additional continuous volumetric deformation field that warps each observed point into a <!-- 额外的连续体积变形场，将每个观察点扭曲到 -->
+            canonical 5D NeRF. <!-- 规范的5D NeRF中 -->
+            We observe that these NeRF-like deformation fields are prone to local minima, and <!-- 我们观察到这些类似NeRF的变形场容易陷入局部最小值 -->
+            propose a coarse-to-fine optimization method for coordinate-based models that allows for <!-- 提出了一种从粗到细的基于坐标的模型优化方法 -->
+            more robust optimization. <!-- 允许更强健的优化 -->
+            By adapting principles from geometry processing and physical simulation to NeRF-like <!-- 通过将几何处理和物理仿真的原理适配到类NeRF -->
+            models, we propose an elastic regularization of the deformation field that further <!-- 模型，我们提出了变形场的弹性正则化 -->
+            improves robustness. <!-- 进一步提高了鲁棒性 -->
+          </p> <!-- 段落2结束 -->
+          <p> <!-- 段落3 -->
+            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie <!-- 我们展示了Nerfies可以将随意拍摄的自拍 -->
+            photos/videos into deformable NeRF <!-- 照片/视频转换为可变形的NeRF -->
+            models that allow for photorealistic renderings of the subject from arbitrary <!-- 模型，允许从任意 -->
+            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data <!-- 视角进行主体的真实感渲染，我们称之为"nerfies"。我们通过收集数据来评估我们的方法 -->
+            using a <!-- 使用一个 -->
+            rig with two mobile phones that take time-synchronized photos, yielding train/validation <!-- 带有两个手机的装置，拍摄时间同步的照片，产生训练/验证 -->
+            images of the same pose at different viewpoints. We show that our method faithfully <!-- 同一姿势在不同视角的图像。我们展示了我们的方法忠实地 -->
+            reconstructs non-rigidly deforming scenes and reproduces unseen views with high <!-- 重建非刚性变形场景并以高 -->
+            fidelity. <!-- 保真度再现未见视角 -->
+          </p> <!-- 段落3结束 -->
+          #############################################
+        </div> <!-- 内容区域结束 -->
+      </div> <!-- 占五分之四宽度的列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+    <!--/ Abstract. --> <!-- 摘要区域结束注释 -->
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
+    <!-- Paper video. --> <!-- 论文视频区域注释 -->
+    <div class="columns is-centered has-text-centered"> <!-- 居中的列布局，文本居中 -->
+      <div class="column is-four-fifths"> <!-- 占五分之四宽度的列 -->
+        <h2 class="title is-3">Video</h2> <!-- 三级标题：视频 -->
+        <div class="publication-video"> <!-- 发布视频容器 -->
+          #############################################
+          <!-- YouTube嵌入视频，关闭相关视频和信息显示 -->
           <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
-  </div>
-</section>
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> <!-- 无边框，允许自动播放和加密媒体，支持全屏 -->
+          #############################################
+        </div> <!-- 发布视频容器结束 -->
+      </div> <!-- 占五分之四宽度的列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+    <!--/ Paper video. --> <!-- 论文视频区域结束注释 -->
+  </div> <!-- 最大桌面尺寸容器结束 -->
+</section> <!-- 普通区域结束 -->
 
 
-<section class="section">
-  <div class="container is-max-desktop">
+<section class="section"> <!-- 普通区域开始 -->
+  <div class="container is-max-desktop"> <!-- 最大桌面尺寸容器 -->
 
-    <div class="columns is-centered">
+    <div class="columns is-centered"> <!-- 居中的列布局 -->
 
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
+      <!-- Visual Effects. --> <!-- 视觉效果区域注释 -->
+      <div class="column"> <!-- 列 -->
+        <div class="content"> <!-- 内容区域 -->
+          <h2 class="title is-3">Visual Effects</h2> <!-- 三级标题：视觉效果 -->
+          <p> <!-- 段落 -->
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect <!-- 使用nerfies你可以创建有趣的视觉效果。这种推拉变焦效果 -->
+            would be impossible without nerfies since it would require going through a wall. <!-- 如果没有nerfies是不可能的，因为它需要穿过墙壁 -->
+          </p> <!-- 段落结束 -->
+          <!-- 推拉变焦视频：自动播放、显示控件、静音、循环、内联播放 -->
           <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
+            <!-- 视频源文件 -->
+            <source src="./static/videos/室外去台子end.mp4"
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- 推拉变焦视频结束 -->
+        </div> <!-- 内容区域结束 -->
+      </div> <!-- 列结束 -->
+      <!--/ Visual Effects. --> <!-- 视觉效果区域结束注释 -->
 
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
+      <!-- Matting. --> <!-- 抠图区域注释 -->
+      <div class="column"> <!-- 列 -->
+        <h2 class="title is-3">Matting</h2> <!-- 三级标题：抠图 -->
+        <div class="columns is-centered"> <!-- 居中的列布局 -->
+          <div class="column content"> <!-- 内容列 -->
+            <p> <!-- 段落 -->
+              As a byproduct of our method, we can also solve the matting problem by ignoring <!-- 作为我们方法的副产品，我们也可以通过忽略 -->
+              samples that fall outside of a bounding box during rendering. <!-- 渲染过程中落在边界框外的样本来解决抠图问题 -->
+            </p> <!-- 段落结束 -->
+            <!-- 抠图视频：显示控件、内联播放 -->
             <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
+              <!-- 视频源文件 -->
+              <source src="./static/videos/室外取水送水end.mp4"
+                      type="video/mp4"> <!-- 视频类型 -->
+            </video> <!-- 抠图视频结束 -->
+          </div> <!-- 内容列结束 -->
 
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
+        </div> <!-- 居中的列布局结束 -->
+      </div> <!-- 列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+    <!--/ Matting. --> <!-- 抠图区域结束注释 -->
 
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
+    <!-- Animation. --> <!-- 动画区域注释 -->
+    <div class="columns is-centered"> <!-- 居中的列布局 -->
+      <div class="column is-full-width"> <!-- 全宽度列 -->
+        <h2 class="title is-3">Animation</h2> <!-- 三级标题：动画 -->
 
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
+        <!-- Interpolating. --> <!-- 插值区域注释 -->
+        <h3 class="title is-4">Interpolating states</h3> <!-- 四级标题：插值状态 -->
+        <div class="content has-text-justified"> <!-- 内容区域，文本两端对齐 -->
+          <p> <!-- 段落 -->
+            We can also animate the scene by interpolating the deformation latent codes of two input <!-- 我们也可以通过插值两个输入帧的变形潜在编码来动画化场景 -->
+            frames. Use the slider here to linearly interpolate between the left frame and the right <!-- 使用这里的滑块在左帧和右帧之间进行线性插值 -->
+            frame. <!-- 帧 -->
+          </p> <!-- 段落结束 -->
+        </div> <!-- 内容区域结束 -->
+        <div class="columns is-vcentered interpolation-panel"> <!-- 垂直居中的列布局，插值面板 -->
+          <div class="column is-3 has-text-centered"> <!-- 占三分之一宽度的列，文本居中 -->
+            <!-- 插值开始参考图片 -->
+            <img src="./static/images/interpolate_start.png"
+                 class="interpolation-image" <!-- 插值图片样式类 -->
+                 alt="Interpolate start reference image."/> <!-- 替代文本 -->
+            <p>Start Frame</p> <!-- 开始帧文本 -->
+          </div> <!-- 列结束 -->
+          <div class="column interpolation-video-column"> <!-- 插值视频列 -->
+            <div id="interpolation-image-wrapper"> <!-- 插值图片包装器 -->
+              Loading... <!-- 加载文本 -->
+            </div> <!-- 插值图片包装器结束 -->
+            <input class="slider is-fullwidth is-large is-info" <!-- 滑块：全宽度、大尺寸、信息样式 -->
+                   id="interpolation-slider" <!-- 滑块ID -->
+                   step="1" min="0" max="100" value="0" type="range"> <!-- 步长1，最小值0，最大值100，默认值0，类型为范围 -->
+          </div> <!-- 插值视频列结束 -->
+          <div class="column is-3 has-text-centered"> <!-- 占三分之一宽度的列，文本居中 -->
+            <img src="./static/images/interpolate_end.png" <!-- 插值结束参考图片 -->
+                 class="interpolation-image" <!-- 插值图片样式类 -->
+                 alt="Interpolation end reference image."/> <!-- 替代文本 -->
+            <p class="is-bold">End Frame</p> <!-- 结束帧文本，粗体 -->
+          </div> <!-- 列结束 -->
+        </div> <!-- 垂直居中的列布局结束 -->
+        <br/> <!-- 换行 -->
+        <!--/ Interpolating. --> <!-- 插值区域结束注释 -->
 
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
+        <!-- Re-rendering. --> <!-- 重新渲染区域注释 -->
+        <h3 class="title is-4">Re-rendering the input video</h3> <!-- 四级标题：重新渲染输入视频 -->
+        <div class="content has-text-justified"> <!-- 内容区域，文本两端对齐 -->
+          <p> <!-- 段落 -->
+            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel <!-- 使用Nerfies，你可以从新颖的 -->
+            viewpoint such as a stabilized camera by playing back the training deformations. <!-- 视角重新渲染视频，如通过播放训练变形的稳定摄像机 -->
+          </p> <!-- 段落结束 -->
+        </div> <!-- 内容区域结束 -->
+        <div class="content has-text-centered"> <!-- 内容区域，文本居中 -->
+          <video id="replay-video" <!-- 重播视频 -->
+                 controls <!-- 显示控件 -->
+                 muted <!-- 静音 -->
+                 preload <!-- 预加载 -->
+                 playsinline <!-- 内联播放 -->
+                 width="75%"> <!-- 宽度75% -->
+            <source src="./static/videos/室外高台送包end.mp4" <!-- 视频源文件 -->
+                    type="video/mp4"> <!-- 视频类型 -->
+          </video> <!-- 重播视频结束 -->
+        </div> <!-- 内容区域结束 -->
+        <!--/ Re-rendering. --> <!-- 重新渲染区域结束注释 -->
 
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Concurrent Work. -->
-
-  </div>
-</section>
+      </div> <!-- 全宽度列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+    <!--/ Animation. --> <!-- 动画区域结束注释 -->
 
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
-}</code></pre>
-  </div>
-</section>
+    <!-- Concurrent Work. --> <!-- 同期工作区域注释 -->
+    <div class="columns is-centered"> <!-- 居中的列布局 -->
+      <div class="column is-full-width"> <!-- 全宽度列 -->
+        <h2 class="title is-3">Related Links</h2> <!-- 三级标题：相关链接 -->
+
+        <div class="content has-text-justified"> <!-- 内容区域，文本两端对齐 -->
+          <p> <!-- 段落1 -->
+            There's a lot of excellent work that was introduced around the same time as ours. <!-- 有很多优秀的工作与我们的工作在同一时期推出 -->
+          </p> <!-- 段落1结束 -->
+          <p> <!-- 段落2 -->
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization. <!-- 神经优化的渐进编码引入了类似于我们用于从粗到细优化的窗口位置编码的想法 -->
+          </p> <!-- 段落2结束 -->
+          <p> <!-- 段落3 -->
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a> <!-- D-NeRF和NR-NeRF -->
+            both use deformation fields to model non-rigid scenes. <!-- 都使用变形场来建模非刚性场景 -->
+          </p> <!-- 段落3结束 -->
+          <p> <!-- 段落4 -->
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a> <!-- 一些工作通过直接调制密度来使用NeRF建模视频，如Video-NeRF、NSFF和DyNeRF -->
+          </p> <!-- 段落4结束 -->
+          <p> <!-- 段落5 -->
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>. <!-- 到你阅读这篇文章时，可能还有更多。查看Frank Dellart关于最新NeRF论文的调查，以及Yen-Chen Lin策划的NeRF论文列表 -->
+          </p> <!-- 段落5结束 -->
+        </div> <!-- 内容区域结束 -->
+      </div> <!-- 全宽度列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+    <!--/ Concurrent Work. --> <!-- 同期工作区域结束注释 -->
+
+  </div> <!-- 最大桌面尺寸容器结束 -->
+</section> <!-- 普通区域结束 -->
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX"> <!-- BibTeX区域开始，设置ID -->
+  <div class="container is-max-desktop content"> <!-- 最大桌面尺寸容器，内容样式 -->
+    <h2 class="title">BibTeX</h2> <!-- 二级标题：BibTeX -->
+    <pre><code>#############################################
+@article{park2021nerfies, <!-- 预格式化代码块：BibTeX引用格式 -->
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo}, <!-- 作者列表 -->
+  title     = {Nerfies: Deformable Neural Radiance Fields}, <!-- 论文标题 -->
+  journal   = {ICCV}, <!-- 期刊/会议名称 -->
+  year      = {2021}, <!-- 发表年份 -->
+}
+#############################################</code></pre> <!-- 预格式化代码块结束 -->
+  </div> <!-- 容器结束 -->
+</section> <!-- BibTeX区域结束 -->
 
 
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+<footer class="footer"> <!-- 页脚开始 -->
+  <div class="container"> <!-- 容器 -->
+    <div class="content has-text-centered"> <!-- 内容区域，文本居中 -->
+      <a class="icon-link" <!-- 图标链接 -->
+         href="./static/videos/nerfies_paper.pdf"> <!-- PDF文件链接 -->
+        <i class="fas fa-file-pdf"></i> <!-- PDF文件图标 -->
+      </a> <!-- 图标链接结束 -->
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled> <!-- GitHub图标链接，已禁用 -->
+        <i class="fab fa-github"></i> <!-- GitHub图标 -->
+      </a> <!-- 图标链接结束 -->
+    </div> <!-- 内容区域结束 -->
+    <div class="columns is-centered"> <!-- 居中的列布局 -->
+      <div class="column is-8"> <!-- 占八分之一宽度的列 -->
+        <div class="content"> <!-- 内容区域 -->
+          <p> <!-- 段落1 -->
+            This website is licensed under a <a rel="license" <!-- 本网站采用许可协议 -->
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative <!-- 知识共享署名-相同方式共享4.0国际许可协议 -->
+            Commons Attribution-ShareAlike 4.0 International License</a>. <!-- 许可协议链接结束 -->
+          </p> <!-- 段落1结束 -->
+          <p> <!-- 段落2 -->
+            This means you are free to borrow the <a <!-- 这意味着你可以自由借用 -->
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website, <!-- 本网站的源代码 -->
+            we just ask that you link back to this page in the footer. <!-- 我们只要求你在页脚链接回这个页面 -->
+            Please remember to remove the analytics code included in the header of the website which <!-- 请记住删除网站头部包含的分析代码 -->
+            you do not want on your website. <!-- 你不希望在你的网站上出现的 -->
+          </p> <!-- 段落2结束 -->
+        </div> <!-- 内容区域结束 -->
+      </div> <!-- 列结束 -->
+    </div> <!-- 居中的列布局结束 -->
+  </div> <!-- 容器结束 -->
+</footer> <!-- 页脚结束 -->
 
-</body>
-</html>
+</body> <!-- 页面主体结束 -->
+</html> <!-- HTML根元素结束 -->
